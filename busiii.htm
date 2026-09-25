@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FixxyBusiness | Tech Help</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            background: rgba(5,5,5,0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #222;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #888;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid #333;
+            border-radius: 50px;
+            color: #aaa;
+            font-size: 12px;
+            margin-bottom: 25px;
+            background: #0d0d0d;
+            animation: fadeUp 1s ease;
+        }
+
+        h1 {
+            font-size: clamp(50px, 9vw, 105px);
+            line-height: 0.9;
+            font-weight: 900;
+            letter-spacing: -5px;
+            animation: fadeUp 1s ease 0.1s backwards;
+        }
+
+        h1 span {
+            color: #777;
+        }
+
+        .hero p {
+            margin: 30px auto;
+            max-width: 650px;
+            color: #999;
+            font-size: 18px;
+            line-height: 1.7;
+            animation: fadeUp 1s ease 0.2s backwards;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            animation: fadeUp 1s ease 0.3s backwards;
+        }
+
+        .btn {
+            padding: 15px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-main {
+            background: white;
+            color: black;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+        }
+
+        .btn-dark {
+            border: 1px solid #333;
+            color: white;
+            background: #0c0c0c;
+        }
+
+        .btn-dark:hover {
+            border-color: #777;
+            transform: translateY(-4px);
+        }
+
+        /* Sections */
+        section {
+            padding: 110px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        /* ABOUT */
+        .about {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-text {
+            color: #999;
+            line-height: 1.9;
+            font-size: 17px;
+        }
+
+        /* SERVICES */
+        .services-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #111, #080808);
+            border: 1px solid #242424;
+            padding: 35px;
+            border-radius: 15px;
+            transition: 0.35s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: white;
+            opacity: 0.025;
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #555;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #777;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* TIPS */
+        .tips {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .tip {
+            border: 1px solid #222;
+            background: #0b0b0b;
+            padding: 22px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .tip:hover {
+            background: #111;
+            border-color: #444;
+        }
+
+        .tip-number {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .tip h4 {
+            margin-bottom: 5px;
+        }
+
+        .tip p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* CONTACT */
+        .contact {
+            text-align: center;
+            background: linear-gradient(180deg, #050505, #101010);
+            border-top: 1px solid #1d1d1d;
+        }
+
+        .contact h2 {
+            font-size: clamp(40px, 7vw, 75px);
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto 35px;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 30px 7%;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* ANIMATION */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            nav a {
+                margin-left: 12px;
+                font-size: 12px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .tip {
+                align-items: flex-start;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">
+            FIXXY<span>BUSINESS</span>
+        </div>
+
+        <div>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#tips">Tips</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                TECH SUPPORT • TROUBLESHOOTING • SOLUTIONS
+            </div>
+
+            <h1>
+                FIX YOUR<br>
+                <span>TECH.</span>
+            </h1>
+
+            <p>
+                Welcome to FixxyBusiness — a simple place for people
+                who need help with computers, phones, software, internet
+                problems, and other everyday technology issues.
+            </p>
+
+            <div class="buttons">
+                <a href="#services" class="btn btn-main">
+                    Explore Services
+                </a>
+
+                <a href="#contact" class="btn btn-dark">
+                    Contact Us
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <div class="section-title">
+            <h2>Who We Are</h2>
+            <p>Simple technology help for everyday problems.</p>
+        </div>
+
+        <div class="about">
+
+            <p class="about-text">
+                FixxyBusiness is a technology-help service designed to
+                make confusing tech problems easier to understand.
+                We provide simple suggestions, troubleshooting ideas,
+                and guidance for common problems involving computers,
+                phones, software, networks, and other devices.
+                <br><br>
+                Instead of getting overwhelmed by complicated technical
+                information, we help break problems down into simple
+                steps that are easier to follow.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+    <section id="services">
+
+        <div class="section-title">
+            <h2>What We Do</h2>
+            <p>Got a problem? Let's figure it out.</p>
+        </div>
+
+        <div class="services-grid">
+
+            <div class="card">
+                <div class="icon">💻</div>
+                <h3>PC Problems</h3>
+                <p>
+                    Suggestions for slow computers, crashes,
+                    startup problems, software errors, and
+                    other common PC issues.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Phone Help</h3>
+                <p>
+                    Basic troubleshooting suggestions for
+                    common smartphone and device problems.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌐</div>
+                <h3>Internet Issues</h3>
+                <p>
+                    Get ideas for dealing with connection,
+                    Wi-Fi, browser, and network problems.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚙️</div>
+                <h3>Software Help</h3>
+                <p>
+                    Guidance for installation errors,
+                    application problems, settings, and updates.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🛠️</div>
+                <h3>Troubleshooting</h3>
+                <p>
+                    Step-by-step suggestions designed to help
+                    identify what might be causing a problem.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💡</div>
+                <h3>Tech Suggestions</h3>
+                <p>
+                    Helpful ideas for improving your setup,
+                    solving issues, and getting more from your devices.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK TIPS -->
+    <section id="tips">
+
+        <div class="section-title">
+            <h2>Quick Fixes</h2>
+            <p>Try these basic steps before contacting support.</p>
+        </div>
+
+        <div class="tips">
+
+            <div class="tip">
+                <div class="tip-number">01</div>
+
+                <div>
+                    <h4>Restart Your Device</h4>
+                    <p>
+                        A simple restart can fix many temporary
+                        software and performance problems.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tip">
+                <div class="tip-number">02</div>
+
+                <div>
+                    <h4>Check Your Connections</h4>
+                    <p>
+                        Make sure cables, chargers, Wi-Fi,
+                        and other connections are properly connected.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tip">
+                <div class="tip-number">03</div>
+
+                <div>
+                    <h4>Check For Updates</h4>
+                    <p>
+                        Outdated software can sometimes cause
+                        compatibility and performance problems.
+                    </p>
+                </div>
+            </div>
+
+            <div class="tip">
+                <div class="tip-number">04</div>
+
+                <div>
+                    <h4>Still Not Working?</h4>
+                    <p>
+                        Contact FixxyBusiness and we'll help you
+                        figure out what to try next.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+
+        <h2>Need Help?</h2>
+
+        <p>
+            Having a technology problem you can't figure out?
+            Reach out to FixxyBusiness and get pointed in the
+            right direction.
+        </p>
+
+        <!-- Contact button redirects to your provided link -->
+        <a
+            href="https://youtu.be/dQw4w9WgXcQ?si=cNu8E91DjJ9XaKgF"
+            class="btn btn-main"
+        >
+            CONTACT US
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div>
+            © 2026 FixxyBusiness
+        </div>
+
+        <div>
+            Tech help. Simple solutions.
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
